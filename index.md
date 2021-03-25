@@ -1,1 +1,1 @@
-### Making a site for the project
+### Placeholder until we have something
