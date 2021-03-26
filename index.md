@@ -1,4 +1,4 @@
-### Author contributions available [here](cbb-750-final/contributions.md) 
+### Author contributions available [here](contributions.md) 
 
 ## Introduction
 
