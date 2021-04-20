@@ -7,7 +7,7 @@ Last updated 4/19/21
 A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 
 Files included: 
-* [file 1]
-	* [description]
+* exploratory.Rmd
+	* R script that filters out patients based on whether or not they have radiology notes
 * [file 2] 
 	* [description]
