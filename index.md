@@ -1,5 +1,3 @@
-#### A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
-
 ### Author contributions available [here](contributions.md) 
 
 ## Introduction
