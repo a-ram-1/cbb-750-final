@@ -11,6 +11,6 @@ A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 
 Here are the files included in this repo [note: we are not including MIMIC files as they are access-controlled]: 
 * exploratory.Rmd
-	* R script that filters out unique patients based on whether or not they have text notes in MIMIC's NOTEEVENTS table
+	* Sarah's R script that filters out unique patients based on whether or not they have text notes in MIMIC's NOTEEVENTS table
 * SubID\_ICD\_Diseases.ipynb_ 
-	* Python notebook that finds subject ids for cardiomyopathy/coronary artery disease patients using MIMIC's D\_ICD\_DIAGNOSES and DIAGNOSES\_ICD tables
+	* Saejeong's python notebook that finds subject ids for cardiomyopathy/coronary artery disease patients using MIMIC's D\_ICD\_DIAGNOSES and DIAGNOSES\_ICD tables
