@@ -1,4 +1,4 @@
-# Classifying cardiomyopathy v. congestive heart failure for radiology patients with and without vectorized text data
+# Classifying cardiomyopathy v. coronary artery disease for patients with and without vectorized text data
 
 ### Author contributions available [here](contributions.md) 
 
