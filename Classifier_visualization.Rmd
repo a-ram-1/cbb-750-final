@@ -104,7 +104,7 @@ kfold_plot
 K-fold Accuracy without Decision Tree
 
 ```{r}
-# Create dataframe for Accuracy without Decision Tree
+# Create dataframe for K-fold Accuracy without Decision Tree
 
 k_fold_rmDT <- c(11.64, 11.74, 11.61, 11.61, 11.65,
                  11.37, 11.55, 11.61, 11.37, 11.44,
@@ -132,7 +132,22 @@ auc_plot
 ```
 
 
+AUC without Decision Tree
 
+```{r}
+# Create dataframe for AUC without Decision Tree
+
+auc_rmDT <- c(0.5, 0.501, 0.5, 0.518, 0.51,
+         0.5, 0.5, 0.5, 0.5, 0.5,
+         0.5, 0.504, 0.501, 0.515, 0.506)
+aucdf_rmDT <- data.frame(data_rmDT, class_rmDT, auc_rmDT)
+
+# Plot for AUC without Decision Tree
+auc_rmDT_plot <- ggplot(data = aucdf_rmDT) +
+  geom_line(aes(x = factor(data_rmDT, level = level_order), y = auc_rmDT, colour = class_rmDT, group = class_rmDT)) +
+              labs(title = "AUC without Decision Tree") + xlab("Data") + ylab("Values")
+auc_rmDT_plot
+```
 
 
 
