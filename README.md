@@ -35,7 +35,8 @@ A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 * CBB\_750\_final\_project.ipynb
 	* A and Sarah's python notebook that extracts the most recent notes for each patient, runs doc2vec, generates labels and classifies/evaluates performance
 * nontext
-	* A directory for non-text data matrix + related scripts, including the following files: 
+	* Jason's directory for non-text data matrix + related scripts, including the following files: 
 		* nontext/mimic\_processing.Rmd
 			* Jason's R script that grabs the most recent LABEVENTS data for each CM/CAD patient and formats into a data matrix
-
+* Classifier\_visualization.Rmd
+	* Saejeong's supplementary script that cleanly visualizes accuracy/k-fold accuracy/AUC across different tasks 

@@ -1,0 +1,140 @@
+---
+title: "Classifier Visualization"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+```
+
+
+Dataframe
+
+```{r}
+# Create dataframes using classifier evaluation obtained by A
+
+data <- c("Non-text", "Non-text", "Non-text", "Non-text", "Non-text", "Non-text", "Non-text",
+          "Text", "Text", "Text", "Text", "Text", "Text", "Text",
+          "Both", "Both", "Both", "Both", "Both", "Both", "Both")
+
+class <- c("GLM", "GLM (Boost)", "Decision Tree", "Decision Tree (Boost)", "SVM", "Random Forest", "Majority Vote",
+           "GLM", "GLM (Boost)", "Decision Tree", "Decision Tree (Boost)", "SVM", "Random Forest", "Majority Vote",
+           "GLM", "GLM (Boost)", "Decision Tree", "Decision Tree (Boost)", "SVM", "Random Forest", "Majority Vote")
+
+# Dataframe for Accuracy
+accuracy <- c(11.97, 12.06, 22.39, 21.44, 11.88, 11.88, 11.94,
+              11.32, 11.32, 19.24, 20.22, 11.32, 11.52, 11.26,
+              11.64, 11.81, 18.50, 18.50, 11.58, 11.44, 11.61)
+accu_df <- data.frame(data, class, accuracy)
+
+# Dataframe for K-fold accuracy
+k_fold <- c(11.64, 11.74, 22.32, 22.14, 11.61, 11.61, 11.65,
+            11.37, 11.55, 19.66, 19.73, 11.61, 11.37, 11.44,
+            11.37, 12.24, 17.95, 18.03, 11.62, 11.33, 11.47)
+kfold_df <- data.frame(data, class, k_fold)
+
+# Dataframe for AUC
+auc <- c(0.5, 0.501, 0.563, 0.549, 0.5, 0.518, 0.51,
+         0.5, 0.5, 0.507, 0.510, 0.5, 0.5, 0.5,
+         0.5, 0.504, 0.572, 0.580, 0.501, 0.515, 0.506)
+auc_df <- data.frame(data, class, auc)
+
+```
+
+
+Accuracy plot
+
+```{r}
+# Plot for Accuracy
+
+level_order <- c('Non-text', 'Text', 'Both')
+accu_plot <- ggplot(data = accu_df) +
+  geom_line(aes(x = factor(data, level = level_order), y = accuracy, colour = class, group = class)) +
+              labs(title = "Accuracy") + xlab("Data") + ylab("Error rate (%)")
+accu_plot
+```
+
+
+Accuracy without Decision Tree
+
+```{r}
+# Create dataframe for Accuracy without Decision Tree
+
+data_rmDT <- c("Non-text", "Non-text", "Non-text", "Non-text", "Non-text",
+               "Text", "Text", "Text", "Text", "Text",
+          "Both", "Both", "Both", "Both", "Both")
+
+class_rmDT <- c("GLM", "GLM (Boost)", "SVM", "Random Forest", "Majority Vote",
+           "GLM", "GLM (Boost)", "SVM", "Random Forest", "Majority Vote",
+           "GLM", "GLM (Boost)", "SVM", "Random Forest", "Majority Vote")
+
+accuracy_rmDT <- c(11.97, 12.06, 11.88, 11.88, 11.94,
+                   11.32, 11.32, 11.32, 11.52, 11.26,
+              11.64, 11.81, 11.58, 11.44, 11.61)
+accu_rmDT <- data.frame(data_rmDT, class_rmDT, accuracy_rmDT)
+
+# Plot for Accuracy without Decision Tree
+accu_rmDT_plot <- ggplot(data = accu_rmDT) +
+  geom_line(aes(x = factor(data_rmDT, level = level_order), y = accuracy_rmDT, colour = class_rmDT, group = class_rmDT)) +
+  labs(title = "Accuracy without Decision Tree") + xlab("Data") + ylab("Error rate (%)")
+accu_rmDT_plot
+```
+
+
+K-fold Accuracy plot
+
+```{r}
+# Plot for K-fold Accuracy
+
+kfold_plot <- ggplot(data = kfold_df) +
+  geom_line(aes(x = factor(data, level = level_order), y = k_fold, colour = class, group = class)) +
+              labs(title = "K-fold Accuracy") + xlab("Data") + ylab("Error rate (%)")
+kfold_plot
+
+```
+
+
+K-fold Accuracy without Decision Tree
+
+```{r}
+# Create dataframe for Accuracy without Decision Tree
+
+k_fold_rmDT <- c(11.64, 11.74, 11.61, 11.61, 11.65,
+                 11.37, 11.55, 11.61, 11.37, 11.44,
+            11.37, 12.24, 11.62, 11.33, 11.47)
+kfold_rmDT <- data.frame(data_rmDT, class_rmDT, k_fold_rmDT)
+
+# Plot for K-fold Accuracy without Decision Tree
+kfold_rmDT_plot <- ggplot(data = kfold_rmDT) +
+  geom_line(aes(x = factor(data_rmDT, level = level_order), y = k_fold_rmDT, colour = class_rmDT, group = class_rmDT)) +
+              labs(title = "K-fold Accuracy without Decision Tree") + xlab("Data") + ylab("Error rate (%)")
+kfold_rmDT_plot
+```
+
+
+AUC plot
+
+```{r}
+# Plot for AUC
+
+auc_plot <- ggplot(data = auc_df) +
+  geom_line(aes(x = factor(data, level = level_order), y = auc, colour = class, group = class)) +
+              labs(title = "AUC") + xlab("Data") + ylab("Values")
+auc_plot
+
+```
+
+
+
+
+
+
+
+
