@@ -27,7 +27,7 @@ A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 * We check feature importance [when possible, not all models, like SVM with nonlinear kernel, allow] to better understand why our model performance is often not great 
 
 
-### Here are the files included in this repo [note: we are not including MIMIC files as they are access-controlled]: 
+## Here are the files included in this repo [note: we are not including MIMIC files as they are access-controlled]: 
 * exploratory.Rmd
 	* Sarah's R script that filters out unique patients based on whether or not they have text notes in MIMIC's NOTEEVENTS table
 * SubjectsWithNotes.csv
