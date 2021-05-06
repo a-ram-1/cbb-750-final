@@ -1,0 +1,103 @@
+---
+title: "Processing Non-text Data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First load in relevant libraries
+
+```{r}
+library("data.table")
+library("dplyr")
+```
+
+Next, we load in the relevant files
+
+```{r}
+# loading in labevents mimic table
+labevents <- data.frame(fread("~/Downloads/LABEVENTS.csv"))
+# loading in labitems mimic table
+d_labitems <- read.csv("~/Downloads/D_LABITEMS.csv",as.is=T)
+# loading in relevant subject_ids based on ICD codes
+subid <- read.csv("~/Downloads/SubID_ICD_Disease-2.csv",as.is=T)
+```
+
+Next, we create a dataframe called labevents_filtered, which only selects the labevents rows that correspond to the subject IDs that we would like to keep (based on ICD codes). We also create a unique ID consisting of the subject ID, the item ID, and the chart time. 
+```{r}
+# filter the labevents for only subject IDs we are interested in
+labevents_filtered <- labevents[which(labevents$SUBJECT_ID %in% subid$SUBJECT_ID),]
+# use paste function to create unique ID
+labevents_filtered$tmpid <- paste(labevents_filtered$SUBJECT_ID, labevents_filtered$ITEMID, labevents_filtered$CHARTTIME, sep="~")
+```
+
+Following the above steps, we would like to select the n most recent readings. We make this parameter n, and use the dplyr package to select only these entries.
+
+```{r}
+# number of recent readings to use
+n <- 3
+# use dplyr to first convert the chart time to a Date object, and then to group by the unique ID and only select the n most recent readings
+labevents_filtered2 <- labevents_filtered %>%
+  mutate(CHARTTIME=as.Date(CHARTTIME,'%m-%d-%Y')) %>%
+  group_by(tmpid) %>%
+  arrange(desc(CHARTTIME)) %>%
+  slice(1:n)
+```
+
+In order to further process the data, we considered reformatting the data to allow ease of use. Specifically, we extract only the relevant columns (subject ID, item ID, unique ID, and variable value).
+
+```{r}
+# create a new data frame with only the columns we would like to keep
+labevents_reformat <- data.frame(labevents_filtered2$SUBJECT_ID, labevents_filtered2$ITEMID, cbind(paste(labevents_filtered2$SUBJECT_ID,labevents_filtered2$ITEMID,sep="~"), labevents_filtered2$VALUENUM))
+
+# rename the columns
+colnames(labevents_reformat) <- c("SUBJECT_ID", "ITEMID", "NEW_ID", "VALUE")
+
+# make sure all values are converted to numeric type
+labevents_reformat$VALUE <- as.numeric(labevents_reformat$VALUE)
+
+# remove NA values
+labevents_reformat <- na.omit(labevents_reformat)
+
+
+```
+
+Now that we have processed the data in a more manageable way and also only kept the n most recent readings for each value, we can change aggregate for a given unique identifier the numeric values. This can be done useing the dplyr package.
+
+```{r}
+# aggregate (by taking the mean) for values with the same unique ID
+labevents_aggregate <- labevents_reformat %>%
+    group_by(NEW_ID) %>%
+    summarize(aggregate_VALUE=mean(VALUE))
+# another way to aggregate using base R, but slower, so not used:
+#z <- aggregate(VALUE ~ NEW_ID, data=labevents_reformat, FUN=mean)
+```
+
+Next, let's instantitate the final matrix (clinical covariates) that we will want to write.
+
+```{r}
+# create a dataframe for the final output
+clinical_covariates <- data.frame(matrix(rep(NA, length(unique(labevents_aggregate$SUBJECT_ID))*length(unique(labevents_aggregate$ITEMID))), nrow=length(unique(labevents_aggregate$SUBJECT_ID))))
+# name the rows and columns appropriately
+rownames(clinical_covariates) <- unique(labevents_aggregate$SUBJECT_ID)
+colnames(clinical_covariates) <- unique(labevents_aggregate$ITEMID)
+```
+
+We can fill the final matrix with the appropriate values and label the columns with the actual variable names based on the mimic labitems table.
+
+```{r}
+for(i in 1:dim(labevents_aggregate)[1]){
+  clinical_covariates[as.character(labevents_aggregate$SUBJECT_ID[i]), as.character(labevents_aggregate$ITEMID[i])] <- labevents_aggregate$aggregate_VALUE[i]
+ 
+}
+colnames(clinical_covariates) <- d_labitems$LABEL[match(colnames(clinical_covariates), d_labitems$ITEMID)]
+```
+
+Finally we can write out the clinical covariates matrix. This is the full non-text data where the rows are the subjects and the columns are the variables. This is further processed with imputation (see main python scripts) and then passed along to the modeling steps.
+
+```{r}
+write.csv(clinical_covariates, "~/Downloads/labevents2_processed_matrix.csv",quote = F)
+
+```
