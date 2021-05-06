@@ -1,6 +1,6 @@
 # CBB 750 final project
 
-Last updated 4/21/21
+Last updated 5/5/21
 
 ### Classifying cardiomyopathy v. coronary artery disease for patients with and without vectorized text data
 
