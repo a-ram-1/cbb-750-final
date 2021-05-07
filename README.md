@@ -6,7 +6,7 @@ Last updated 5/7/21
 
 A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 
-# Here are the files included in this branch: 
+## Here are the files included in this branch: 
 * \_config.yml
 	* A config file for the website
 * contributions.md
