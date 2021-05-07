@@ -14,7 +14,7 @@
   * A plot of k-fold error rates over each dataset
 * kfoldnodt.png
   * An inset of kfold.png without decision tree results as they hamper visualization of the other values  
- * auc.png
+* auc.png
   * A plot of AUC over each dataset
 * aucnodt.png
   * An inset of auc.png without decision tree results as they hamper visualization of the other values   
