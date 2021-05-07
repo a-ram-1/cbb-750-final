@@ -38,7 +38,7 @@ This work is performed in [SubID_ICD_Diseases.ipynb](https://github.com/a-ram-1/
 
 #### Text Data
 
-##### Data Extraction & Cohort selection
+##### Data Extraction and Cohort selection
 
 Text data originated from the ```NOTEEVENTS.csv``` file in MIMIC III. Unique notes are stored one per line, alongside other data factors such as ```SUBJECT_ID```, note type, note sub-type, and multiple forms of timestamp. On further inspection of the csv file, we found that while ```NOTEEVENTS``` contains over 2 million notes, it only represents 46,146 unique patients. This was a limiting factor in our study, so we had to handle our cohort selection as follows: 
 
@@ -55,7 +55,7 @@ Notes come in multiple categories. After consultation with a physician, we learn
 
 After constructing our streamlined dataframe of the most recent note per unique patient, we looked at the resulting distribution of note categories. As seen in the figure above, there is one patient with a note of category ‘Nursing/other’. On further inspection of the data, we found that this patient only has one note, so there is no opportunity to pull a more predictive note for this patient. All other patient notes were of the more predictive note categories, so we decided this method was an acceptable baseline for further analysis.
 
-As described in the [Issues Encountered & Solutions](#issues-encountered-and-solutions-for-future-work) section, more careful inclusion and exclusion criteria may build a more refined cohort for future classification studies.
+As described in the [Issues Encountered and Solutions](#issues-encountered-and-solutions-for-future-work) section, more careful inclusion and exclusion criteria may build a more refined cohort for future classification studies.
 
 ##### Preparing vectors for Classification
 
@@ -66,7 +66,7 @@ The cleaning and tokenizing of the corpus was completed using a single custom fu
 
 ##### Vectorization of Note Data - selecting our approach
 
-In homework 4, we vectorized at the word level. This means that each word within a total corpus of words was tokenized, and each token was given a vector. The vectors represent weights. Weights are assigned based on the vectorized word’s relationship & proximity to other words, given the corpus on which the vectorization model is trained. We used Word2Vec.
+In homework 4, we vectorized at the word level. This means that each word within a total corpus of words was tokenized, and each token was given a vector. The vectors represent weights. Weights are assigned based on the vectorized word’s relationship and proximity to other words, given the corpus on which the vectorization model is trained. We used Word2Vec.
 
 In homework 5, we vectorized at the document level. We used a classical approach with one-hot encoding of each token within the document. The resulting data frame of document vectors (each row representing a single vectorized document) contained a series of 1’s and 0’s. Column names represent the top tokens throughout the entire corpus. Each row contains a 1 in columns titled with a token that lies within that document. This method is carried out using CountVectorizer, but it does not include weights, and has a few down-sides. It is typically more bulky than weighted vectorization methods. It also incurs data loss when the columns are cut down to only the top tokens within the corpus, i.e. less-frequent tokens will be cut from the resulting vector. 
 
