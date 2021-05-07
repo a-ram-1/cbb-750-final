@@ -55,7 +55,7 @@ Notes come in multiple categories. After consultation with a physician, we learn
 
 After constructing our streamlined dataframe of the most recent note per unique patient, we looked at the resulting distribution of note categories. As seen in the figure above, there is one patient with a note of category ‘Nursing/other’. On further inspection of the data, we found that this patient only has one note, so there is no opportunity to pull a more predictive note for this patient. All other patient notes were of the more predictive note categories, so we decided this method was an acceptable baseline for further analysis.
 
-As described in the [Issues Encountered & Solutions](#issues-encountered-&-solutions-for-future-work) section, more careful inclusion and exclusion criteria may build a more refined cohort for future classification studies.
+As described in the [Issues Encountered & Solutions](#issues-encountered-and-solutions-for-future-work) section, more careful inclusion and exclusion criteria may build a more refined cohort for future classification studies.
 
 ##### Preparing vectors for Classification
 
@@ -74,13 +74,13 @@ In this project, we want to classify at the document level. As such, we have a f
 ave a few options:
 
 1. Use Word2Vec
-	a. Our goal is to classify at the document level. Word2Vec will provide one vector of standard length per word. Each document will contain a list of vectors (of standard length). However, the length of the list will vary depending on the length of the document and its resulting tokens. Therefore, this method produces a unique dataframe per document. While each data frame will contain the same number of columns, it will not contain the same number of rows. Longer documents will have dataframes with more rows.
-	b. One method to handle this is summing over all rows per column to convert the unstandardized 2D matrix to a 1D vector of standard shape per document. However, the summation and data aggregation may result in 
+	* Our goal is to classify at the document level. Word2Vec will provide one vector of standard length per word. Each document will contain a list of vectors (of standard length). However, the length of the list will vary depending on the length of the document and its resulting tokens. Therefore, this method produces a unique dataframe per document. While each data frame will contain the same number of columns, it will not contain the same number of rows. Longer documents will have dataframes with more rows.
+	* One method to handle this is summing over all rows per column to convert the unstandardized 2D matrix to a 1D vector of standard shape per document. However, the summation and data aggregation may result in 
 2. Use CountVectorizer
-	a. Our documents are very long and contained several thousand tokens per document. Therefore, we would either have to run this method and incur data loss (cutting low-frequency tokens), or run with bulkier data and pass the computational pattern-finding steps to the classifier, instead of running them earlier in the vectorization step.
+	* Our documents are very long and contained several thousand tokens per document. Therefore, we would either have to run this method and incur data loss (cutting low-frequency tokens), or run with bulkier data and pass the computational pattern-finding steps to the classifier, instead of running them earlier in the vectorization step.
 3. Try a new approach: Doc2Vec [13]
-	a. Doc2Vec is the same model with the same two architecture options (Continuous Bag of Words and SkipGram; retitled Paragraph Vector Distributed Memory and Paragraph Vector Distributed Bag of Words, respectively). Doc2Vec was made by the same researchers who developed Word2Vec, but it was designed to operate at a different level of hierarchical text data. If we consider the top tier of text data to be the corpus, the next level is documents, followed by paragraphs, sentences, and words. Where Word2Vec (with either architecture) operates at the word level, Doc2Vec operates at the document level, and removes the summing and aggregation steps outlined in bullet 1b.
-	b. Some studies demonstrate this approach to have greater accuracy in classification than aggregating over multiple Word2Vec vectors. [14]
+	* Doc2Vec is the same model with the same two architecture options (Continuous Bag of Words and SkipGram; retitled Paragraph Vector Distributed Memory and Paragraph Vector Distributed Bag of Words, respectively). Doc2Vec was made by the same researchers who developed Word2Vec, but it was designed to operate at a different level of hierarchical text data. If we consider the top tier of text data to be the corpus, the next level is documents, followed by paragraphs, sentences, and words. Where Word2Vec (with either architecture) operates at the word level, Doc2Vec operates at the document level, and removes the summing and aggregation steps outlined in bullet 1b.
+	* Some studies demonstrate this approach to have greater accuracy in classification than aggregating over multiple Word2Vec vectors. [14]
 
 We elected to run the Bag of Words architecture (retitled Paragraph Vector Distributed Memory) at the document level.
 
@@ -96,7 +96,7 @@ Similar to document classification in homework 5, we converted our resulting doc
 
 ##### Introduction and Rmd Script
 
-In order to collect and process the non-text data from MIMIC, we created a R script in R markdown which has been fully documented, commented, and organized. The Rmd file can be found on our GitHub repository at: [mimic_processing.Rmd](https://github.com/a-ram-1/cbb-750-final/blob/master/nontext/mimic_processing.Rmd). While the details of the processing are given in the Rmd file, below we give a brief summary of the processing workflow as well as relevant details of how the non-text data relates to our downstream analysis.
+In order to collect and process the non-text data from MIMIC, we created a R script in R markdown which has been fully documented, commented, and organized. The Rmd file can be found on our GitHub repository at: [mimic\_processing.Rmd](https://github.com/a-ram-1/cbb-750-final/blob/master/nontext/mimic_processing.Rmd). While the details of the processing are given in the Rmd file, below we give a brief summary of the processing workflow as well as relevant details of how the non-text data relates to our downstream analysis.
 
 ##### Data Selection and Loading the Data
 
@@ -104,7 +104,7 @@ We prioritize using the ```LABEVENTS``` and ```D_LABITEMS``` tables for this sec
 
 ##### Filtering the data for most recent values
 
-An important aspect to consider when aggregating values is the time at which a measurement was taken. Often, the most relevant time points to consider are the most recent measurements, as they provide the most up to date information of an individual. As such, we aimed to parametrize this aspect. To do so, we created unique IDs representing a combination of the subject, variable, and time point. We then used the dplyr package to only select n most recent time points. We can consider this value of _n_ to be the recency parameter. This was done using both ```Date``` and ```slice``` functions within the ```dplyr```` function. Due to the parametrization of the recency parameter, we are able to create various versions of the data that take into account different amounts of time points. (See [Issues Encountered and Future work](#issues-encountered-&-solutions-for-future-work), where we perform a comparison between different recency parameter usage).
+An important aspect to consider when aggregating values is the time at which a measurement was taken. Often, the most relevant time points to consider are the most recent measurements, as they provide the most up to date information of an individual. As such, we aimed to parametrize this aspect. To do so, we created unique IDs representing a combination of the subject, variable, and time point. We then used the dplyr package to only select n most recent time points. We can consider this value of _n_ to be the recency parameter. This was done using both ```Date``` and ```slice``` functions within the ```dplyr```` function. Due to the parametrization of the recency parameter, we are able to create various versions of the data that take into account different amounts of time points. (See [Issues Encountered and Future work](#issues-encountered-and-solutions-for-future-work), where we perform a comparison between different recency parameter usage).
 
 ##### Aggregating the table to create an organized data frame
 
@@ -233,7 +233,7 @@ Concatenation of multimodal data types appears to have impacted feature importan
 ![](images/textnontextfi.png)
 
 
-## Issues Encountered & Solutions for Future Work
+## Issues Encountered and Solutions for Future Work
 
 ### Adjustments made after final presentation
 
