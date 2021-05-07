@@ -22,6 +22,8 @@
 
 ##### Data Extraction & Cohort selection
 
+![](images/notefreq.png)
+
 ##### Preparing vectors for Classification
 
 ##### Vectorization of Note Data - selecting our approach
