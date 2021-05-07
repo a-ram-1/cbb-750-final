@@ -33,4 +33,6 @@
 * testlabels.png
   * Distribution of test labels for all datasets
 * glmimportance.png
-  * Feature importance for GLM with text + non-text data  
+  * Feature importance for GLM with text + non-text data 
+* notefreq.png
+  * Histogram showing the frequency of MIMIC NOTEEVENTS categories 
