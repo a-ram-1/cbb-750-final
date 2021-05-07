@@ -35,4 +35,6 @@
 * glmimportance.png
   * Feature importance for GLM with text + non-text data 
 * notefreq.png
-  * Histogram showing the frequency of MIMIC NOTEEVENTS categories 
+  * Histogram showing the frequency of MIMIC NOTEEVENTS categories
+* nontextmatrix.png
+  * Example screenshot of non-text matrix 
