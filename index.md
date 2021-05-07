@@ -248,13 +248,13 @@ We performed the following adjustments and made the subsequent considerations up
 
 * Text Data
     * Problem: “Most recent” ```NOTEEVENTS```/```LABEVENTS``` values are hard to actually find
-* ```NOTEEVENTS``` dates are weirdly into the future
-* As discussed with Dr. Jarad in the final presentation, most recent ```NOTEEVENTS```/```LABEVENTS``` values may not be the most accurate as the patient may be improved/on their way to discharge by then
-* Patients could have died 
-* Patients could have moved hospitals. 
+		* ```NOTEEVENTS``` dates are weirdly into the future
+		* As discussed with Dr. Jarad in the final presentation, most recent ```NOTEEVENTS```/```LABEVENTS``` values may not be the most accurate as the patient may be improved/on their way to discharge by then
+		* Patients could have died 
+		* Patients could have moved hospitals. 
     * Potential Solution: Use the 3 most recent notes/lab readings from a patient. 
-* However, this solution runs the risk of including unrelated or outdated readings [e.g. 2 most recent readings for a patient are a year apart] 
-* Furthermore, we could be including notes that are not pertinent to classification (like nursing notes, etc.) Some patients only have nursing notes, so they would either have to be coded in as an exception to the rule, or removed via exclusion criteria. Therefore, this method was pushed to further work as it will take significant time to accurately clean the dataset and remove superfluous 
+		* However, this solution runs the risk of including unrelated or outdated readings [e.g. 2 most recent readings for a patient are a year apart] 
+		* Furthermore, we could be including notes that are not pertinent to classification (like nursing notes, etc.) Some patients only have nursing notes, so they would either have to be coded in as an exception to the rule, or removed via exclusion criteria. Therefore, this method was pushed to further work as it will take significant time to accurately clean the dataset and remove superfluous 
     * Problem: Doc2Vec may not be the best solution
         * While some studies demonstrate Doc2Vec as having better vectorization for document level classification, accuracy depends on document number and document length. These factors should be considered in future work.
     * Potential Solution: Use Word2Vec and conduct a system of concatenation and aggregation
