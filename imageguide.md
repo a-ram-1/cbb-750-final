@@ -31,4 +31,6 @@
 * trainlabels.png
   * Distribution of training labels for all datasets
 * testlabels.png
-  * Distribution of test labels for all datasets 
+  * Distribution of test labels for all datasets
+* glmimportance.png
+  * Feature importance for GLM with text + non-text data  
