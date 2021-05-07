@@ -27,4 +27,8 @@
 * nonna.png
   * Plot of the number of NA values per each column in the non-text data matrix
 * convergence.png
-  * Screenshot showing that GLM+AdaBoost does not properly converge with the current solver 
+  * Screenshot showing that GLM+AdaBoost does not properly converge with the current solver
+* trainlabels.png
+  * Distribution of training labels for all datasets
+* testlabels.png
+  * Distribution of test labels for all datasets 
