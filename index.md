@@ -207,9 +207,6 @@ Once our classifier has a better accuracy, we could use the novel pipeline built
 ## Bibliography
 
 
-## Bibliography
-
-
 1. Kruska M, El-Battrawy I, Behnes M, Borggrefe M, Akin I. Biomarkers in Cardiomyopathies and Prediction of Sudden Cardiac Death. Curr Pharm Biotechnol. 2017;18(6):472-481. Doi: 10.2174/1389201018666170623125842. PMID: 28669332.
 2. Nicolson WB, McCann GP, Smith MI, Sandilands AJ, Stafford PJ, Schlindwein FS, Samani NJ, Ng GA. Prospective evaluation of two novel ECG-based restitution biomarkers for prediction of sudden cardiac death risk in ischaemic cardiomyopathy. Heart. 2014 Dec;100(23):1878-85. doi: 10.1136/heartjnl-2014-305672. Epub 2014 Aug 4. PMID: 25092878.
 3. Rakowski H. Determining Hypertrophic Cardiomyopathy Mortality: Gaining Wisdom From Knowledge. JAMA Cardiol. 2020;5(1):81–82. doi:10.1001/jamacardio.2019.4548
