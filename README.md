@@ -6,6 +6,8 @@ Last updated 5/7/21
 
 A Ram, Jason Liu, Saejeong Park, Sarah Dudgeon
 
+**Our website is available at [https://a-ram-1.github.io/cbb-750-final/](https://a-ram-1.github.io/cbb-750-final/).** 
+
 ## Here are the files included in this branch: 
 * \_config.yml
 	* A config file for the website
