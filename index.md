@@ -177,7 +177,7 @@ Now we move to AUC. Interestingly, the models with highest AUC also had the high
 
 Incorporating the text data appears to increase AUC above 0.5 in almost all classifiers [apart from the GLM]. However, the same discrepancy persists. Decision tree has the highest AUC and the second highest simple/k-fold error rate. Decision tree with boosting has the second highest AUC and highest simple/k-fold error rate. When analyzing the text+non-text data, decision tree with boosting has the highest AUC, simple error and k-fold error.
 
-![](images/icdtable.png)
+![](images/classifiertable.png)
 
 To better analyze the trends in accuracy/AUC over the different datasets, we turn to the following figures. We first look at simple accuracy.
 
